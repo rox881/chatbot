@@ -18,7 +18,7 @@ from core.conversation_manager import ConversationManager
 
 def main():
     print("\n" + "="*70)
-    print("🤖 CONVERSATIONAL AGENT - DEBUG MODE")
+    print("CONVERSATIONAL AGENT - DEBUG MODE")
     print("="*70)
     print("Type 'reset' to clear state. Type 'quit' to exit.\n")
     
@@ -59,7 +59,7 @@ def main():
             
             print(f"\nBot: {response}")
             print("-" * 40)
-            print(f"🔧 [STATE: {current_state}]")
+            print(f" [STATE: {current_state}]")
             
             # Show profile accumulation
             profile_summary = []
@@ -69,12 +69,12 @@ def main():
             if profile['fitness_goal']: profile_summary.append(profile['fitness_goal'])
             
             if profile_summary:
-                print(f"📝 [PROFILE]: {', '.join(profile_summary)}")
+                print(f"[PROFILE]: {', '.join(profile_summary)}")
                 
         except KeyboardInterrupt:
             break
         except Exception as e:
-            print(f"❌ ERROR: {e}")
+            print(f"ERROR: {e}")
             import traceback
             traceback.print_exc()
 

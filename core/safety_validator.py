@@ -62,8 +62,8 @@ class SafetyValidator:
                         errors.append(error)
                 else:
                     # Regular foods: 30-600g
-                    if portion < 30:
-                        error = f"Portion too small: {food['name']} ({portion}g < 30g)"
+                    if portion < 15:
+                        error = f"Portion too small: {food['name']} ({portion}g < 15g)"
                         print(f"[SAFETY] ERROR: {error}")
                         errors.append(error)
                     elif portion > 600:

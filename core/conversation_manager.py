@@ -213,7 +213,7 @@ class ConversationManager:
                 profile["age"] = int(age)
                 # Ensure we have a gender field in profile, even if default
                 conv["current_state"] = self.STATE_ONBOARDING_ACTIVITY
-                return f"{int(age)} years young! 😊 Activity level? (sedentary/light/moderate/active)"
+                return f"{int(age)} years young!  Activity level? (sedentary/light/moderate/active)"
             elif age is None:
                 return "I need a number like '25' (not 'twenty five'). How old are you?"
             else:
@@ -228,7 +228,11 @@ class ConversationManager:
                 # Trigger generation immediately
                 return self._generate_plan(conv)
             return "Please choose: sedentary, light, moderate, or active."
-            
+
+        # State: Ready for Plan (Auto-generate on any input)
+        elif state == self.STATE_READY_FOR_PLAN:
+            return self._generate_plan(conv)
+
         # State: Showing Roadmap (Maintenance mode)
         elif state == self.STATE_SHOWING_ROADMAP:
             # Simple handling for follow-ups or reset
@@ -240,7 +244,8 @@ class ConversationManager:
             # For now, simplistic re-generation or guidance
             return "I've designed this plan for you. Type 'reset' to start over or let me know if you need adjustments!"
             
-        return "I'm not sure what you mean. Let's stick to the plan! 😊"
+        else:
+            return "I'm not sure what you mean. Let's stick to the plan!"
 
     def _match_keyword(self, text: str, mapping: Dict) -> Optional[str]:
         text = text.lower()
@@ -257,7 +262,7 @@ class ConversationManager:
         required_fields = ["weight_kg", "height_cm", "age", "activity_level", "fitness_goal"]
         missing = [f for f in required_fields if profile.get(f) is None]
         if missing:
-            return f"⚠️ Let's complete your profile first! Missing: {', '.join(missing)}"
+            return f" Let's complete your profile first! Missing: {', '.join(missing)}"
         
         try:
             # 1. Model 2: Roadmap
@@ -276,7 +281,7 @@ class ConversationManager:
             )
             
             if meal_result['status'] != 'success':
-                return f"⚠️ I had trouble generating a meal plan: {meal_result.get('error')}"
+                return f" I had trouble generating a meal plan: {meal_result.get('error')}"
             
             meal_plan = meal_result['meal_plan']
             
@@ -289,7 +294,7 @@ class ConversationManager:
             
             if not is_valid:
                 # In production, we might retry or adjust. For now, report safety issue.
-                return f"⚠️ Safety Check Failed: {'; '.join(errors)}. Please adjust your profile."
+                return f" Safety Check Failed: {'; '.join(errors)}. Please adjust your profile."
             
             # 5. NLG
             current_week = profile.get('current_week', 1)

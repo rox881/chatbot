@@ -25,11 +25,11 @@ class NLGenerator:
         """
         # Goal-specific emoji
         goal_emoji = {
-            "weight_loss": "\ud83d\udd25",
-            "muscle_gain": "\ud83d\udcaa",
-            "maintenance": "\u2696\ufe0f"
+            "weight_loss": "",
+            "muscle_gain": "",
+            "maintenance": ""
         }
-        emoji = goal_emoji.get(profile.get('fitness_goal'), "\u2728")
+        emoji = goal_emoji.get(profile.get('fitness_goal'), "")
         
         goal_display = profile.get('fitness_goal', 'fitness').replace('_', ' ').title()
         weight = profile.get('weight_kg', '??')
@@ -46,20 +46,20 @@ class NLGenerator:
                 daily_protein += meal.get('total_protein_g', 0)
         
         # Build response
-        response = f"{emoji} **Week {week} {goal_display} Plan** (Based on YOUR {weight}kg/{height}cm profile)\n\n"
+        response = f"**Week {week} {goal_display} Plan** (Based on YOUR {weight}kg/{height}cm profile)\n\n"
         
         # Format each meal
         meals_config = [
-            ('breakfast', '\ud83c\udf73', 'Breakfast'),
-            ('lunch', '\ud83e\udd57', 'Lunch'),
-            ('dinner', '\ud83c\udf72', 'Dinner'),
-            ('snack', '\ud83c\udf4e', 'Snack')
+            ('breakfast', '', 'Breakfast'),
+            ('lunch', '', 'Lunch'),
+            ('dinner', '', 'Dinner'),
+            ('snack', '', 'Snack')
         ]
         
         for meal_key, emoji_meal, title in meals_config:
             if meal_key in meal_plan:
                 meal = meal_plan[meal_key]
-                response += f"{emoji_meal} **{title}**\n"
+                response += f"**{title}**\n"
                 response += self._format_meal(meal)
                 response += "\n\n"
         
@@ -67,12 +67,12 @@ class NLGenerator:
         target_cals = roadmap.get('target_calories', 0)
         exercise_mins = roadmap.get('target_exercise_minutes', 150)
         
-        response += f"\ud83d\udcca **Daily Totals**\n"
+        response += f"**Daily Totals**\n"
         response += f"\u2022 Calories: {daily_cals:.0f} kcal | Protein: {daily_protein:.0f}g\n"
         response += f"\u2022 Exercise: {exercise_mins} mins/day\n\n"
         
         # Pro tip based on goal
-        response += "\ud83d\udca1 **Pro Tip**: "
+        response += "**Pro Tip**: "
         if profile.get('fitness_goal') == 'weight_loss':
             response += "Drink water 30 mins before meals to feel fuller faster!\n\n"
         elif profile.get('fitness_goal') == 'muscle_gain':
@@ -80,7 +80,7 @@ class NLGenerator:
         else:
             response += "Consistency is key \u2014 you're doing great!\n\n"
         
-        response += "Want to adjust portions or see tomorrow's plan? \ud83d\ude0a"
+        response += "Want to adjust portions or see tomorrow's plan?"
         
         return response
 
