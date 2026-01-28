@@ -132,12 +132,15 @@ class ConversationManager:
         return self.conversations[user_id]
     
     def _extract_number(self, text: str) -> Optional[float]:
-        """Extract numeric value."""
-        text = text.lower().strip()
-        text = re.sub(r'(kg|kilograms?|cm|centimeters?|years?|old)', '', text)
-        numbers = re.findall(r'\d+\.?\d*', text)
-        if numbers:
-            return float(numbers[0])
+        """Extract numeric value - rejects word numbers like 'seventy'."""
+        text = text.strip()
+        # Remove units but keep the number
+        text_clean = re.sub(r'(kg|kilogram|kilograms|cm|centimeter|centimeters|years?|old)', '', text, flags=re.IGNORECASE)
+        # Find first number (int or decimal)
+        match = re.search(r'(\d+\.?\d*)', text_clean)
+        if match:
+            return float(match.group(1))
+        # Word numbers like "seventy" will return None -> triggers helpful error
         return None
         
     def adapt_model2_to_model3(self, model2_output: Dict, user_profile: Dict) -> Dict:
@@ -186,7 +189,10 @@ class ConversationManager:
                 profile["weight_kg"] = weight
                 conv["current_state"] = self.STATE_ONBOARDING_HEIGHT
                 return f"✅ {weight} kg logged. Height in cm?"
-            return self.nl_generator.format_onboarding_error('weight', '')
+            elif weight is None:
+                return "I need a number like '70' (not 'seventy'). What's your weight in kg?"
+            else:
+                return f"That weight seems unusual ({weight} kg). Please enter a realistic weight (40-200 kg)."
 
         # State: Height
         elif state == self.STATE_ONBOARDING_HEIGHT:
@@ -195,7 +201,10 @@ class ConversationManager:
                 profile["height_cm"] = height
                 conv["current_state"] = self.STATE_ONBOARDING_AGE
                 return f"{height} cm — perfect. How old are you?"
-            return self.nl_generator.format_onboarding_error('height', '')
+            elif height is None:
+                return "I need a number like '170' (not 'one seventy'). What's your height in cm?"
+            else:
+                return f"That height seems unusual ({height} cm). Please enter a realistic height (100-250 cm)."
 
         # State: Age
         elif state == self.STATE_ONBOARDING_AGE:
@@ -205,7 +214,10 @@ class ConversationManager:
                 # Ensure we have a gender field in profile, even if default
                 conv["current_state"] = self.STATE_ONBOARDING_ACTIVITY
                 return f"{int(age)} years young! 😊 Activity level? (sedentary/light/moderate/active)"
-            return self.nl_generator.format_onboarding_error('age', '')
+            elif age is None:
+                return "I need a number like '25' (not 'twenty five'). How old are you?"
+            else:
+                return f"That age seems unusual ({age} years). Please enter a realistic age (13-100 years)."
 
         # State: Activity (Final Step)
         elif state == self.STATE_ONBOARDING_ACTIVITY:
@@ -240,6 +252,12 @@ class ConversationManager:
     def _generate_plan(self, conv: Dict) -> str:
         """Orchestrate the pipeline: Model 2 -> Adapter -> Model 3 -> Validator -> NLG."""
         profile = conv["profile"]
+        
+        # VALIDATION: Ensure complete profile before generation
+        required_fields = ["weight_kg", "height_cm", "age", "activity_level", "fitness_goal"]
+        missing = [f for f in required_fields if profile.get(f) is None]
+        if missing:
+            return f"⚠️ Let's complete your profile first! Missing: {', '.join(missing)}"
         
         try:
             # 1. Model 2: Roadmap

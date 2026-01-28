@@ -17,11 +17,13 @@ class SafetyValidator:
     OIL_PORTION_RANGE = (5, 30) # grams for oils/fats
     CALORIE_TOLERANCE = 0.07   # ±7%
     
-    # Foods allowed to be small portions (oils, seeds, condiments)
-    SMALL_PORTION_EXCEPTIONS = [
-        'oil', 'butter', 'seeds', 'nuts', 'dressing', 'sauce', 'mayonnaise', 
-        'ghee', 'spices', 'salt', 'pepper', 'sugar', 'honey'
+    # Foods allowed to be small portions (oils, seeds, condiments, calorie-dense foods)
+    OILS_AND_FATS = ['oil', 'butter', 'ghee', 'mayonnaise', 'dressing']
+    CALORIE_DENSE_FOODS = [
+        'seeds', 'nuts', 'avocado', 'almond', 'walnut', 'cashew', 'peanut',
+        'cheese', 'cream', 'olives'
     ]
+    CONDIMENTS = ['sauce', 'spices', 'salt', 'pepper', 'sugar', 'honey']
 
     def validate_meal_plan(self, meal_plan: Dict, daily_target_calories: int, restrictions: List[str]) -> Tuple[bool, List[str]]:
         """
@@ -77,20 +79,28 @@ class SafetyValidator:
                 portion = food.get('portion_g', 0)
                 name = food.get('name', '').lower()
                 
-                # Check if it's an exception (oil, etc.)
-                is_exception = any(exc in name for exc in self.SMALL_PORTION_EXCEPTIONS)
+                # Categorize the food
+                is_oil = any(exc in name for exc in self.OILS_AND_FATS)
+                is_dense = any(exc in name for exc in self.CALORIE_DENSE_FOODS)
+                is_condiment = any(exc in name for exc in self.CONDIMENTS)
                 
-                if is_exception:
+                if is_oil:
+                    # Strict 5-30g range for oils/fats
                     if not (self.OIL_PORTION_RANGE[0] <= portion <= self.OIL_PORTION_RANGE[1]):
-                        # Just a warning for oils, or strict check? Prompt says "except oils: 5-30g"
-                        # enforcing strict range for now as per specific prompt requirement
                         if portion > self.OIL_PORTION_RANGE[1]:
-                             errors.append(f"Portion too large for condiment/oil: {food['name']} ({portion}g)")
+                            errors.append(f"Portion too large for oil: {food['name']} ({portion}g > 30g)")
+                        elif portion < self.OIL_PORTION_RANGE[0]:
+                            errors.append(f"Portion too small for oil: {food['name']} ({portion}g < 5g)")
+                elif is_dense or is_condiment:
+                    # Allow small portions for calorie-dense foods and condiments - only check max
+                    if portion > self.MAX_PORTION_G:
+                        errors.append(f"Portion too large: {food['name']} ({portion}g > {self.MAX_PORTION_G}g)")
                 else:
+                    # Regular foods: enforce 50-500g range
                     if portion < self.MIN_PORTION_G:
-                         errors.append(f"Portion too small: {food['name']} ({portion}g < {self.MIN_PORTION_G}g)")
+                        errors.append(f"Portion too small: {food['name']} ({portion}g < {self.MIN_PORTION_G}g)")
                     elif portion > self.MAX_PORTION_G:
-                         errors.append(f"Portion too large: {food['name']} ({portion}g > {self.MAX_PORTION_G}g)")
+                        errors.append(f"Portion too large: {food['name']} ({portion}g > {self.MAX_PORTION_G}g)")
 
     def _validate_protein(self, meal_plan: Dict, errors: List[str]):
         """Ensure minimum protein per main meal."""
