@@ -1,4 +1,4 @@
-"""
+    """
 Integration Test Suite: Full Pipeline Testing
 Tests all critical scenarios for production deployment.
 """

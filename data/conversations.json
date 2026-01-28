@@ -1,0 +1,17 @@
+{
+  "test_conv_001": {
+    "current_state": "ready_for_plan",
+    "profile": {
+      "weight_kg": 70.0,
+      "height_cm": 170.0,
+      "age": 25,
+      "gender": "other",
+      "activity_level": "moderate",
+      "fitness_goal": "weight_loss",
+      "current_week": 1,
+      "dietary_restrictions": []
+    },
+    "last_interaction": "2026-01-28T10:54:10.076026",
+    "message_count": 6
+  }
+}
