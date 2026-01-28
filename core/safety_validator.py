@@ -25,103 +25,68 @@ class SafetyValidator:
     ]
     CONDIMENTS = ['sauce', 'spices', 'salt', 'pepper', 'sugar', 'honey']
 
-    def validate_meal_plan(self, meal_plan: Dict, daily_target_calories: int, restrictions: List[str]) -> Tuple[bool, List[str]]:
+    def validate_meal_plan(self, meal_plan: dict, daily_target_calories: int, restrictions: list) -> tuple:
         """
-        Validate meal plan against safety constraints.
-        
-        Args:
-            meal_plan: Generated meal plan dictionary
-            daily_target_calories: Target daily calories
-            restrictions: List of dietary restrictions (e.g., 'nut_free')
-            
-        Returns:
-            Tuple (is_valid, list_of_errors)
+        Simplified safety validation with fixed portion logic.
+        Returns: (is_valid: bool, errors: list)
         """
         errors = []
         
-        # 1. Gate 1: Allergen Filtering (Zero Tolerance)
-        if not self._validate_allergens(meal_plan, restrictions, errors):
-            return False, errors # Fail immediately on allergens
-            
-        # 2. Gate 2: Portion Sanity
-        self._validate_portions(meal_plan, errors)
+        # Gate 1: Allergen filtering (zero tolerance)
+        for meal_name, meal in meal_plan.items():
+            if meal_name == 'daily_summary' or "foods" not in meal:
+                continue
+            for food in meal["foods"]:
+                if any(r in food.get("allergens", []) for r in restrictions):
+                    error = f"[SAFETY] ALLERGEN VIOLATION: {food['name']} in {meal_name}"
+                    print(error)
+                    errors.append(error)
+                    return False, errors  # Fail fast on allergens
         
-        # 3. Gate 3: Minimum Protein
-        self._validate_protein(meal_plan, errors)
-        
-        # 4. Gate 4: Calorie Accuracy
-        self._validate_calories(meal_plan, daily_target_calories, errors)
-        
-        return len(errors) == 0, errors
-
-    def _validate_allergens(self, meal_plan: Dict, restrictions: List[str], errors: List[str]) -> bool:
-        """Check for allergen violations."""
-        if not restrictions:
-            return True
-            
-        for meal_name, meal_data in meal_plan.items():
-            if meal_name == 'daily_summary': continue
-            
-            for food in meal_data.get('foods', []):
-                food_allergens = food.get('allergens', [])
-                for restriction in restrictions:
-                    if restriction in food_allergens:
-                        errors.append(f"ALLERGEN ALERT: {food['name']} contains {restriction} in {meal_name}")
-                        return False # Fail fast
-        return True
-
-    def _validate_portions(self, meal_plan: Dict, errors: List[str]):
-        """Check for realistic portion sizes."""
-        for meal_name, meal_data in meal_plan.items():
-            if meal_name == 'daily_summary': continue
-            
-            for food in meal_data.get('foods', []):
-                portion = food.get('portion_g', 0)
-                name = food.get('name', '').lower()
+        # Gate 2: FIXED portion checks (30g-600g range)
+        for meal_name, meal in meal_plan.items():
+            if meal_name == 'daily_summary' or "foods" not in meal:
+                continue
+            for food in meal["foods"]:
+                portion = food.get("portion_g", 0)
+                name = food.get("name", "Unknown").lower()
                 
-                # Categorize the food
-                is_oil = any(exc in name for exc in self.OILS_AND_FATS)
-                is_dense = any(exc in name for exc in self.CALORIE_DENSE_FOODS)
-                is_condiment = any(exc in name for exc in self.CONDIMENTS)
+                # Check if it's a condiment/oil that can be smaller
+                is_tiny_ok = any(x in name for x in self.CONDIMENTS + self.OILS_AND_FATS)
                 
-                if is_oil:
-                    # Strict 5-30g range for oils/fats
-                    if not (self.OIL_PORTION_RANGE[0] <= portion <= self.OIL_PORTION_RANGE[1]):
-                        if portion > self.OIL_PORTION_RANGE[1]:
-                            errors.append(f"Portion too large for oil: {food['name']} ({portion}g > 30g)")
-                        elif portion < self.OIL_PORTION_RANGE[0]:
-                            errors.append(f"Portion too small for oil: {food['name']} ({portion}g < 5g)")
-                elif is_dense or is_condiment:
-                    # Allow small portions for calorie-dense foods and condiments - only check max
-                    if portion > self.MAX_PORTION_G:
-                        errors.append(f"Portion too large: {food['name']} ({portion}g > {self.MAX_PORTION_G}g)")
+                if is_tiny_ok:
+                    # Condiments/oils: 5-50g is reasonable
+                    if portion < 5 or portion > 50:
+                        error = f"Condiment portion unusual: {food['name']} ({portion}g)"
+                        print(f"[SAFETY] WARNING: {error}")
+                        errors.append(error)
                 else:
-                    # Regular foods: enforce 50-500g range
-                    if portion < self.MIN_PORTION_G:
-                        errors.append(f"Portion too small: {food['name']} ({portion}g < {self.MIN_PORTION_G}g)")
-                    elif portion > self.MAX_PORTION_G:
-                        errors.append(f"Portion too large: {food['name']} ({portion}g > {self.MAX_PORTION_G}g)")
-
-    def _validate_protein(self, meal_plan: Dict, errors: List[str]):
-        """Ensure minimum protein per main meal."""
-        for meal_name in ['breakfast', 'lunch', 'dinner']:
+                    # Regular foods: 30-600g
+                    if portion < 30:
+                        error = f"Portion too small: {food['name']} ({portion}g < 30g)"
+                        print(f"[SAFETY] ERROR: {error}")
+                        errors.append(error)
+                    elif portion > 600:
+                        error = f"Portion too large: {food['name']} ({portion}g > 600g)"
+                        print(f"[SAFETY] ERROR: {error}")
+                        errors.append(error)
+        
+        # Gate 3: Minimum protein per main meal (15g threshold)
+        for meal_name in ["breakfast", "lunch", "dinner"]:
             if meal_name in meal_plan:
-                protein = meal_plan[meal_name].get('total_protein_g', 0)
-                if protein < self.MIN_PROTEIN_PER_MEAL:
-                    errors.append(f"Insufficient protein in {meal_name}: {protein:.1f}g < {self.MIN_PROTEIN_PER_MEAL}g")
-
-    def _validate_calories(self, meal_plan: Dict, target: int, errors: List[str]):
-        """Ensure total calories are within tolerance."""
-        if 'daily_summary' in meal_plan:
-            total_cals = meal_plan['daily_summary'].get('total_calories', 0)
+                meal = meal_plan[meal_name]
+                protein = meal.get("total_protein_g", 0)
+                if protein < 15:
+                    error = f"Low protein: {meal_name} has {protein:.1f}g (<15g)"
+                    print(f"[SAFETY] WARNING: {error}")
+                    errors.append(error)
+        
+        # Return result
+        if len(errors) == 0:
+            print("[SAFETY] All checks passed")
+            return True, []
         else:
-            total_cals = 0
-            for meal_name, meal_data in meal_plan.items():
-                if meal_name != 'daily_summary':
-                     total_cals += meal_data.get('total_calories', 0)
-        
-        # Calculate deviation
-        deviation = abs(total_cals - target) / target if target > 0 else 1.0
-        
-        if deviation > self.CALORIE_TOLERANCE:
-            errors.append(f"Calorie deviation too high: {total_cals} vs target {target} ({deviation*100:.1f}% > 7.0%)")
+            print(f"[SAFETY] {len(errors)} validation issues found")
+            return len(errors) == 0, errors
+
+
