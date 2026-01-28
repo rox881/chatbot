@@ -50,22 +50,22 @@ class FitnessChatbotPipeline:
         self.intent_classifier = IntentClassifier(
             model_path=os.path.join(base_dir, 'intent_model', 'intent_model.pkl')
         )
-        print("  ✓ Model 1: Intent Classifier loaded")
+        print("  [OK] Model 1: Intent Classifier loaded")
         
         self.roadmap_generator = RoadmapGenerator(
             model_path=os.path.join(base_dir, 'RoadMap_model', 'roadmap_model.pkl')
         )
-        print("  ✓ Model 2: Roadmap Generator loaded")
+        print("  [OK] Model 2: Roadmap Generator loaded")
         
         self.food_recommender = FoodRecommender(
             database_path=os.path.join(base_dir, 'model_3_build', 'model3_food_database.json')
         )
-        print("  ✓ Model 3: Food Recommender loaded")
+        print("  [OK] Model 3: Food Recommender loaded")
         
         self.state_manager = StateManager(
             storage_path=os.path.join(base_dir, 'data', 'user_profiles.json')
         )
-        print("  ✓ State Manager initialized")
+        print("  [OK] State Manager initialized")
         
         print("[Pipeline] All models loaded successfully!\n")
     
@@ -125,14 +125,14 @@ class FitnessChatbotPipeline:
                 is_safe, errors = self._validate_safety(meal_plan, roadmap['dietary_restrictions'])
                 
                 if not is_safe:
-                    print(f"[Pipeline] ⚠ Safety validation failed: {errors}")
+                    print(f"[Pipeline] [WARNING] Safety validation failed: {errors}")
                     return {
                         "status": "error",
                         "error": "Safety validation failed - regenerating plan",
                         "details": errors
                     }
                 
-                print(f"[Pipeline] ✓ Safety validation passed")
+                print(f"[Pipeline] [OK] Safety validation passed")
                 
                 # STEP 7: Natural Language Formatting
                 response = self._format_response(
@@ -141,7 +141,7 @@ class FitnessChatbotPipeline:
                 
                 # STEP 8: Update User State (Advance week counter)
                 updated_state = self.state_manager.update_user_progress(user_id, roadmap)
-                print(f"[Pipeline] User progress updated: Week {user_state['week']} → {updated_state['week']}")
+                print(f"[Pipeline] User progress updated: Week {user_state['week']} to {updated_state['week']}")
                 
                 return {
                     "status": "success",
@@ -218,11 +218,11 @@ class FitnessChatbotPipeline:
         
         # Add motivational message based on goal
         if user_state['fitness_goal'] == 'weight_loss':
-            response += f"\n\n💪 Stay consistent! Track your {roadmap['target_exercise_minutes']} minutes of daily activity."
+            response += f"\n\n[!] Stay consistent! Track your {roadmap['target_exercise_minutes']} minutes of daily activity."
         elif user_state['fitness_goal'] == 'muscle_gain':
-            response += f"\n\n💪 Focus on progressive overload in your {roadmap['target_exercise_minutes']}-minute workouts!"
+            response += f"\n\n[!] Focus on progressive overload in your {roadmap['target_exercise_minutes']}-minute workouts!"
         else:
-            response += f"\n\n💪 Maintain your {roadmap['target_exercise_minutes']} minutes of daily activity for optimal health."
+            response += f"\n\n[!] Maintain your {roadmap['target_exercise_minutes']} minutes of daily activity for optimal health."
         
         return response
     
@@ -243,7 +243,7 @@ class FitnessChatbotPipeline:
             response += f"  • Weight: {user_state['weight_kg']} kg\n"
             response += f"  • Height: {user_state['height_cm']} cm\n"
             response += f"  • Activity Level: {user_state['activity_level'].title()}\n\n"
-            response += "Keep up the great work! 💪"
+            response += "Keep up the great work! [!]"
             
             return {
                 "status": "success",
@@ -280,12 +280,12 @@ if __name__ == "__main__":
         )
         
         if result1['status'] == 'success':
-            print("✓ SUCCESS!\n")
+            print("[OK] SUCCESS!\n")
             print(result1['response'])
             print(f"\nIntent: {result1['intent']}")
             print(f"Week: {result1['user_state']['week']}")
         else:
-            print(f"✗ ERROR: {result1['error']}")
+            print(f"[ERROR]: {result1['error']}")
         
         print("\n" + "-" * 70)
         
@@ -297,11 +297,11 @@ if __name__ == "__main__":
         )
         
         if result2['status'] == 'success':
-            print("✓ Week progression working!")
+            print("[OK] Week progression working!")
             print(f"Week: {result2['user_state']['week']} (should be 1, next request will be 2)")
         
         print("\n" + "=" * 70)
-        print("Pipeline integration successful! ✓")
+        print("Pipeline integration successful! [OK]")
         print("=" * 70)
         
     except Exception as e:

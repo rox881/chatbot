@@ -53,7 +53,22 @@ class RoadmapGenerator:
             raise FileNotFoundError(f"Model file not found: {path}")
         
         with open(path, 'rb') as f:
-            return pickle.load(f)
+            loaded = pickle.load(f)
+            
+        # Handle different model formats
+        if isinstance(loaded, dict):
+            # Model is a dictionary with 'models' key
+            self.model_dict = loaded
+            # Extract the models for predictions
+            if 'models' in loaded:
+                # Assume models is a dict with keys like 'calories', 'weight', 'exercise'
+                return loaded['models']
+            else:
+                return loaded
+        else:
+            # Model is a single sklearn model
+            self.model_dict = None
+            return loaded
     
     def _calculate_bmi(self, weight_kg: float, height_cm: float) -> float:
         """Calculate BMI from weight and height."""
@@ -64,28 +79,71 @@ class RoadmapGenerator:
         """
         Encode user state into feature vector for model.
         
+        Model expects 14 features:
+        ['age', 'weight_kg', 'height_cm', 'calorie_intake', 'weekly_exercise_minutes', 
+         'week', 'gender_male', 'activity_sedentary', 'activity_light', 
+         'activity_moderate', 'activity_active', 'goal_weight_loss', 
+         'goal_muscle_gain', 'goal_maintenance']
+        
         Args:
             user_state: Dictionary with user profile fields
         
         Returns:
-            Numpy array of encoded features
+            Numpy array of encoded features (1, 14)
         """
-        # Calculate BMI
-        bmi = self._calculate_bmi(user_state['weight_kg'], user_state['height_cm'])
+        # Base features
+        age = user_state.get('age', 30)
+        weight_kg = user_state['weight_kg']
+        height_cm = user_state['height_cm']
         
-        # Encode categorical variables
-        gender_enc = self.GENDER_ENCODING.get(user_state.get('gender', 'other'), 2)
-        activity_enc = self.ACTIVITY_LEVELS.get(user_state.get('activity_level', 'moderate'), 2)
+        # Estimate initial calorie intake (approximate based on weight and activity)
+        calorie_intake = int(weight_kg * 24 * 1.2)  # BMR approximation
         
-        # Build feature vector (order must match FEATURE_COLUMNS)
+        # Est initial weekly exercise (based on activity level)
+        activity_level = user_state.get('activity_level', 'moderate')
+        exercise_map = {
+            'sedentary': 30,
+            'light': 120,
+            'moderate': 180,
+            'active': 300,
+            'very_active': 420
+        }
+        weekly_exercise_minutes = exercise_map.get(activity_level, 180)
+        
+        week = user_state.get('week', 1)
+        
+        # One-hot encode gender (only 'male' is one-hot, others are 0)
+        gender = user_state.get('gender', 'other')
+        gender_male = 1 if gender == 'male' else 0
+        
+        # One-hot encode activity level
+        activity_sedentary = 1 if activity_level == 'sedentary' else 0
+        activity_light = 1 if activity_level == 'light' else 0
+        activity_moderate = 1 if activity_level == 'moderate' else 0
+        activity_active = 1 if activity_level == 'active' or activity_level == 'very_active' else 0
+        
+        # One-hot encode fitness goal
+        fitness_goal = user_state.get('fitness_goal', 'maintenance')
+        goal_weight_loss = 1 if fitness_goal == 'weight_loss' else 0
+        goal_muscle_gain = 1 if fitness_goal == 'muscle_gain' else 0
+        goal_maintenance = 1 if fitness_goal == 'maintenance' else 0
+        
+        # Build feature vector in exact order expected by model
         features = [
-            user_state.get('age', 30),
-            user_state['weight_kg'],
-            user_state['height_cm'],
-            bmi,
-            gender_enc,
-            activity_enc,
-            user_state.get('week', 1)
+            age,
+            weight_kg,
+            height_cm,
+            calorie_intake,
+            weekly_exercise_minutes,
+            week,
+            gender_male,
+            activity_sedentary,
+            activity_light,
+            activity_moderate,
+            activity_active,
+            goal_weight_loss,
+            goal_muscle_gain,
+            goal_maintenance
         ]
         
         return np.array([features])
@@ -110,24 +168,29 @@ class RoadmapGenerator:
         # Encode features
         features = self._encode_features(user_state)
         
-        # Predict
-        prediction = self.model.predict(features)[0]
-        
-        # Model outputs: [target_weight, target_calories, target_exercise_minutes]
-        # (Assuming this is the output format - adjust based on actual model)
-        
-        if len(prediction) == 3:
-            target_weight, target_calories, target_exercise = prediction
-        elif hasattr(prediction, '__iter__') and len(prediction) >= 2:
-            # Flexible handling for different output formats
-            target_weight = prediction[0] if len(prediction) > 0 else user_state['weight_kg']
-            target_calories = prediction[1] if len(prediction) > 1 else 2000
-            target_exercise = prediction[2] if len(prediction) > 2 else 30
+        # Check if model is a dict of models or a single model
+        if isinstance(self.model, dict):
+            # Separate models for each output
+            target_weight = self.model['weight_kg'].predict(features)[0]
+            target_calories = self.model['calories'].predict(features)[0]
+            target_exercise = self.model['exercise_minutes'].predict(features)[0]
         else:
-            # Single output - treat as calories
-            target_weight = user_state['weight_kg'] * 0.99  # 1% reduction
-            target_calories = float(prediction)
-            target_exercise = 30
+            # Single model outputting all predictions
+            prediction = self.model.predict(features)[0]
+            
+            # Model outputs: [target_weight, target_calories, target_exercise_minutes]
+            if hasattr(prediction, '__len__') and len(prediction) == 3:
+                target_weight, target_calories, target_exercise = prediction
+            elif hasattr(prediction, '__len__') and len(prediction) >= 2:
+                # Flexible handling for different output formats
+                target_weight = prediction[0] if len(prediction) > 0 else user_state['weight_kg']
+                target_calories = prediction[1] if len(prediction) > 1 else 2000
+                target_exercise = prediction[2] if len(prediction) > 2 else 30
+            else:
+                # Single output - treat as calories
+                target_weight = user_state['weight_kg'] * 0.99  # 1% reduction
+                target_calories = float(prediction)
+                target_exercise = 30
         
         return {
             "target_weight_kg": round(float(target_weight), 1),
