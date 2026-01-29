@@ -153,73 +153,63 @@ class RoadmapGenerator:
 
     def predict(self, user_state: Dict) -> Dict:
         """
-        Generate personalized roadmap for user with safety constraints.
-
-        Args:
-            user_state: Dictionary with user profile
-                Required: weight_kg, height_cm
-                Optional: age, gender, activity_level, week
-
-        Returns:
-            Dictionary with:
-                - target_weight_kg: Recommended weight for this week
-                - target_calories: Daily calorie target (safety-constrained)
-                - target_exercise_minutes: Daily exercise minutes
-                - fitness_goal: Extracted from user state
-                - dietary_restrictions: Extracted from user state
+        Generate personalized roadmap with safety constraints.
         """
         # Encode features (14 features including goal encoding)
         features = self._encode_features(user_state)
 
         # Get raw predictions from model
         if isinstance(self.model, dict):
-            # Separate models for each output
             target_weight = self.model["weight_kg"].predict(features)[0]
             target_calories = self.model["calories"].predict(features)[0]
             target_exercise = self.model["exercise_minutes"].predict(features)[0]
         else:
-            # Single model outputting all predictions
             prediction = self.model.predict(features)[0]
-
-            # Model outputs: [target_weight, target_calories, target_exercise_minutes]
             if hasattr(prediction, "__len__") and len(prediction) == 3:
                 target_weight, target_calories, target_exercise = prediction
             elif hasattr(prediction, "__len__") and len(prediction) >= 2:
-                # Flexible handling for different output formats
                 target_weight = (
                     prediction[0] if len(prediction) > 0 else user_state["weight_kg"]
                 )
                 target_calories = prediction[1] if len(prediction) > 1 else 2000
                 target_exercise = prediction[2] if len(prediction) > 2 else 30
             else:
-                # Single output - treat as calories
-                target_weight = user_state["weight_kg"] * 0.99  # 1% reduction
+                target_weight = user_state["weight_kg"] * 0.99
                 target_calories = float(prediction)
                 target_exercise = 30
 
-        # 🔴 CRITICAL SAFETY FIX: Enforce goal-appropriate minimum calories
-        goal = user_state.get("fitness_goal", "weight_loss")
+        # 🔴 CRITICAL SAFETY FIX: ROBUST GOAL DETECTION (handles spaces/underscores/variations)
+        goal_raw = user_state.get("fitness_goal", "weight_loss")
         gender = user_state.get("gender", "female")
+        goal_lower = str(goal_raw).lower()
 
-        # Muscle gain requires surplus calories
-        if goal == "muscle_gain":
+        # Muscle gain detection (catches 'muscle_gain', 'gain muscle', 'muscle gain', etc.)
+        is_muscle_gain = (
+            any(term in goal_lower for term in ["muscle", "gain"])
+            and "loss" not in goal_lower
+            and "cut" not in goal_lower
+        )
+
+        # Weight loss detection
+        is_weight_loss = any(
+            term in goal_lower for term in ["loss", "lose", "cut", "shed"]
+        )
+
+        # Apply safety constraints
+        if is_muscle_gain:
             min_cal = 2500 if gender == "male" else 2200
             if target_calories < min_cal:
                 target_calories = min_cal
-
-        # Weight loss requires safe deficit (never below minimums)
-        elif goal == "weight_loss":
+        elif is_weight_loss:
             min_cal = 1500 if gender == "male" else 1200
             if target_calories < min_cal:
                 target_calories = min_cal
 
-        # Maintenance uses model output directly (no constraint needed)
-
         return {
             "target_weight_kg": round(float(target_weight), 1),
-            "target_calories": int(target_calories),  # ← SAFETY-CONSTRAINED VALUE
+            "target_calories": int(target_calories),
             "target_exercise_minutes": int(target_exercise),
-            "fitness_goal": goal,
+            "fitness_goal": goal_raw,  # Preserve original value
             "dietary_restrictions": user_state.get("dietary_restrictions", []),
         }
 
@@ -258,7 +248,7 @@ if __name__ == "__main__":
 
         roadmap = generator.predict(test_user)
 
-        print(" Generated Roadmap:")
+        print("Generated Roadmap:")
         print(f"  Target Weight: {roadmap['target_weight_kg']} kg")
         print(f"  Target Calories: {roadmap['target_calories']} kcal/day")
         print(f"  Target Exercise: {roadmap['target_exercise_minutes']} min/day")
