@@ -178,6 +178,23 @@ class RoadmapGenerator:
                 target_calories = float(prediction)
                 target_exercise = 30
 
+        # 🔴 CRITICAL SAFETY FIX: Defensive validation for extreme outliers
+        # Handles NaN, negative, zero, or unrealistically low values BEFORE safety patch
+        if not np.isfinite(target_calories) or target_calories <= 0:
+            # Invalid prediction → use conservative baseline
+            original_cal = target_calories
+            target_calories = 2000
+            print(
+                f"[SAFETY] WARNING: Invalid calorie prediction (got {original_cal}). Using fallback 2000 kcal."
+            )
+        elif target_calories < 1000:
+            # Extreme outlier → enforce absolute minimum BEFORE goal-specific patch
+            original_cal = target_calories
+            target_calories = 1500
+            print(
+                f"[SAFETY] WARNING: Extreme outlier detected ({original_cal} kcal). Enforcing 1500 kcal floor."
+            )
+
         # 🔴 CRITICAL SAFETY FIX: ROBUST GOAL DETECTION (handles spaces/underscores/variations)
         goal_raw = user_state.get("fitness_goal", "weight_loss")
         gender = user_state.get("gender", "female")
@@ -195,7 +212,7 @@ class RoadmapGenerator:
             term in goal_lower for term in ["loss", "lose", "cut", "shed"]
         )
 
-        # Apply safety constraints
+        # Apply safety constraints (goal-specific floors)
         if is_muscle_gain:
             min_cal = 2500 if gender == "male" else 2200
             if target_calories < min_cal:
@@ -252,6 +269,26 @@ if __name__ == "__main__":
         print(f"  Target Weight: {roadmap['target_weight_kg']} kg")
         print(f"  Target Calories: {roadmap['target_calories']} kcal/day")
         print(f"  Target Exercise: {roadmap['target_exercise_minutes']} min/day")
+
+        # Test extreme outlier that previously failed (168kg/242cm muscle gain)
+        print("\n[Testing Extreme Outlier - 168kg/242cm Muscle Gain]\n")
+        outlier_user = {
+            "age": 30,
+            "gender": "male",
+            "weight_kg": 168.0,
+            "height_cm": 242.0,
+            "activity_level": "moderate",
+            "week": 1,
+            "fitness_goal": "muscle_gain",
+            "dietary_restrictions": [],
+        }
+        roadmap = generator.predict(outlier_user)
+        print(f"  Target Calories: {roadmap['target_calories']} kcal/day")
+        print(f"  Expected: >=2500 kcal (male muscle gain floor)")
+        if roadmap["target_calories"] >= 2500:
+            print("  ✅ PASS: Safety floor enforced correctly")
+        else:
+            print("  ❌ FAIL: Safety floor NOT enforced")
 
         # Test week progression
         print("\n[Testing Week Progression]\n")
