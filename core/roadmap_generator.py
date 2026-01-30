@@ -214,7 +214,7 @@ class RoadmapGenerator:
 
         # Apply safety constraints (goal-specific floors)
         if is_muscle_gain:
-            min_cal = 2500 if gender == "male" else 2200
+            min_cal = 2700 if gender == "male" else 2400
             if target_calories < min_cal:
                 target_calories = min_cal
         elif is_weight_loss:
