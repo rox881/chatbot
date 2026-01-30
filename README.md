@@ -1,6 +1,3 @@
-Here's a **professional, production-ready README.md** that accurately reflects your architecture (including the unused intent classifier) with emphasis on safety-first design:
-
-```markdown
 # 💪 Conversational Fitness Agent — Safe & Personalized Nutrition Coaching
 
 [![Python 3.8+](https://img.shields.io/badge/Python-3.8%2B-blue)](https://www.python.org/)
@@ -206,7 +203,7 @@ MIT License — Free for commercial use with attribution.
 ---
 
 > 💡 **Final Note**: The unused `intent_classifier.py` is intentionally archived. We made a **conscious engineering decision** to use deterministic keyword matching for onboarding — because when lives depend on correct intent detection, **reliability beats sophistication**. This is mature engineering, not a limitation.
-```
+
 
 ---
 
