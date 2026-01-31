@@ -1,0 +1,1405 @@
+{
+  "timestamp": "2026-01-30T13:58:54.811395",
+  "tests": [
+    {
+      "passed": false,
+      "calories": 730,
+      "min_required": 2200,
+      "profile": {
+        "goal_input": "gain muscle",
+        "fitness_goal": "muscle_gain",
+        "weight": 159,
+        "height": 149,
+        "age": 44,
+        "activity": "active"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 721,
+      "min_required": 1000,
+      "profile": {
+        "goal_input": "maintain weight",
+        "fitness_goal": "maintenance",
+        "weight": 133,
+        "height": 164,
+        "age": 56,
+        "activity": "light"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 743,
+      "min_required": 2200,
+      "profile": {
+        "goal_input": "gain muscle",
+        "fitness_goal": "muscle_gain",
+        "weight": 187,
+        "height": 193,
+        "age": 68,
+        "activity": "light"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 741,
+      "min_required": 2200,
+      "profile": {
+        "goal_input": "gain muscle",
+        "fitness_goal": "muscle_gain",
+        "weight": 120,
+        "height": 184,
+        "age": 31,
+        "activity": "sedentary"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 727,
+      "min_required": 2200,
+      "profile": {
+        "goal_input": "gain muscle",
+        "fitness_goal": "muscle_gain",
+        "weight": 176,
+        "height": 161,
+        "age": 42,
+        "activity": "sedentary"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 727,
+      "min_required": 1500,
+      "profile": {
+        "goal_input": "lose weight",
+        "fitness_goal": "weight_loss",
+        "weight": 183,
+        "height": 197,
+        "age": 16,
+        "activity": "moderate"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 743,
+      "min_required": 2200,
+      "profile": {
+        "goal_input": "gain muscle",
+        "fitness_goal": "muscle_gain",
+        "weight": 110,
+        "height": 222,
+        "age": 62,
+        "activity": "moderate"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 439,
+      "min_required": 1000,
+      "profile": {
+        "goal_input": "maintain weight",
+        "fitness_goal": "maintenance",
+        "weight": 66,
+        "height": 143,
+        "age": 74,
+        "activity": "sedentary"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 714,
+      "min_required": 1500,
+      "profile": {
+        "goal_input": "lose weight",
+        "fitness_goal": "weight_loss",
+        "weight": 131,
+        "height": 168,
+        "age": 66,
+        "activity": "sedentary"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 430,
+      "min_required": 1000,
+      "profile": {
+        "goal_input": "maintain weight",
+        "fitness_goal": "maintenance",
+        "weight": 51,
+        "height": 244,
+        "age": 26,
+        "activity": "very active"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 728,
+      "min_required": 2200,
+      "profile": {
+        "goal_input": "gain muscle",
+        "fitness_goal": "muscle_gain",
+        "weight": 183,
+        "height": 163,
+        "age": 69,
+        "activity": "active"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 711,
+      "min_required": 1500,
+      "profile": {
+        "goal_input": "lose weight",
+        "fitness_goal": "weight_loss",
+        "weight": 162,
+        "height": 141,
+        "age": 39,
+        "activity": "very active"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 0,
+      "min_required": 1500,
+      "profile": {
+        "goal_input": "lose weight",
+        "fitness_goal": "weight_loss",
+        "weight": 60,
+        "height": 220,
+        "age": 83,
+        "activity": "very active"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 729,
+      "min_required": 2200,
+      "profile": {
+        "goal_input": "gain muscle",
+        "fitness_goal": "muscle_gain",
+        "weight": 97,
+        "height": 228,
+        "age": 22,
+        "activity": "very active"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 724,
+      "min_required": 1500,
+      "profile": {
+        "goal_input": "lose weight",
+        "fitness_goal": "weight_loss",
+        "weight": 130,
+        "height": 239,
+        "age": 60,
+        "activity": "moderate"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 461,
+      "min_required": 1000,
+      "profile": {
+        "goal_input": "maintain weight",
+        "fitness_goal": "maintenance",
+        "weight": 70,
+        "height": 178,
+        "age": 79,
+        "activity": "sedentary"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 569,
+      "min_required": 1000,
+      "profile": {
+        "goal_input": "maintain weight",
+        "fitness_goal": "maintenance",
+        "weight": 84,
+        "height": 145,
+        "age": 76,
+        "activity": "active"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 461,
+      "min_required": 1000,
+      "profile": {
+        "goal_input": "maintain weight",
+        "fitness_goal": "maintenance",
+        "weight": 67,
+        "height": 193,
+        "age": 61,
+        "activity": "moderate"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 741,
+      "min_required": 1000,
+      "profile": {
+        "goal_input": "maintain weight",
+        "fitness_goal": "maintenance",
+        "weight": 184,
+        "height": 195,
+        "age": 81,
+        "activity": "active"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 719,
+      "min_required": 1500,
+      "profile": {
+        "goal_input": "lose weight",
+        "fitness_goal": "weight_loss",
+        "weight": 113,
+        "height": 198,
+        "age": 72,
+        "activity": "light"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 712,
+      "min_required": 1500,
+      "profile": {
+        "goal_input": "lose weight",
+        "fitness_goal": "weight_loss",
+        "weight": 193,
+        "height": 151,
+        "age": 33,
+        "activity": "moderate"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 745,
+      "min_required": 2200,
+      "profile": {
+        "goal_input": "gain muscle",
+        "fitness_goal": "muscle_gain",
+        "weight": 134,
+        "height": 240,
+        "age": 51,
+        "activity": "active"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 600,
+      "min_required": 2200,
+      "profile": {
+        "goal_input": "gain muscle",
+        "fitness_goal": "muscle_gain",
+        "weight": 69,
+        "height": 143,
+        "age": 73,
+        "activity": "active"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 724,
+      "min_required": 1000,
+      "profile": {
+        "goal_input": "maintain weight",
+        "fitness_goal": "maintenance",
+        "weight": 143,
+        "height": 145,
+        "age": 77,
+        "activity": "active"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 600,
+      "min_required": 2200,
+      "profile": {
+        "goal_input": "gain muscle",
+        "fitness_goal": "muscle_gain",
+        "weight": 54,
+        "height": 246,
+        "age": 67,
+        "activity": "light"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 406,
+      "min_required": 1000,
+      "profile": {
+        "goal_input": "maintain weight",
+        "fitness_goal": "maintenance",
+        "weight": 44,
+        "height": 241,
+        "age": 72,
+        "activity": "active"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 642,
+      "min_required": 2200,
+      "profile": {
+        "goal_input": "gain muscle",
+        "fitness_goal": "muscle_gain",
+        "weight": 77,
+        "height": 237,
+        "age": 51,
+        "activity": "sedentary"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 728,
+      "min_required": 2200,
+      "profile": {
+        "goal_input": "gain muscle",
+        "fitness_goal": "muscle_gain",
+        "weight": 149,
+        "height": 165,
+        "age": 27,
+        "activity": "sedentary"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 726,
+      "min_required": 2200,
+      "profile": {
+        "goal_input": "gain muscle",
+        "fitness_goal": "muscle_gain",
+        "weight": 171,
+        "height": 156,
+        "age": 58,
+        "activity": "sedentary"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 567,
+      "min_required": 1000,
+      "profile": {
+        "goal_input": "maintain weight",
+        "fitness_goal": "maintenance",
+        "weight": 82,
+        "height": 215,
+        "age": 75,
+        "activity": "active"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 526,
+      "min_required": 1500,
+      "profile": {
+        "goal_input": "lose weight",
+        "fitness_goal": "weight_loss",
+        "weight": 77,
+        "height": 214,
+        "age": 47,
+        "activity": "moderate"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 0,
+      "min_required": 1500,
+      "profile": {
+        "goal_input": "lose weight",
+        "fitness_goal": "weight_loss",
+        "weight": 55,
+        "height": 225,
+        "age": 37,
+        "activity": "sedentary"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 743,
+      "min_required": 2200,
+      "profile": {
+        "goal_input": "gain muscle",
+        "fitness_goal": "muscle_gain",
+        "weight": 135,
+        "height": 172,
+        "age": 30,
+        "activity": "active"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 738,
+      "min_required": 1000,
+      "profile": {
+        "goal_input": "maintain weight",
+        "fitness_goal": "maintenance",
+        "weight": 139,
+        "height": 228,
+        "age": 22,
+        "activity": "sedentary"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 721,
+      "min_required": 1500,
+      "profile": {
+        "goal_input": "lose weight",
+        "fitness_goal": "weight_loss",
+        "weight": 167,
+        "height": 239,
+        "age": 54,
+        "activity": "light"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 743,
+      "min_required": 2200,
+      "profile": {
+        "goal_input": "gain muscle",
+        "fitness_goal": "muscle_gain",
+        "weight": 152,
+        "height": 182,
+        "age": 82,
+        "activity": "light"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 737,
+      "min_required": 1000,
+      "profile": {
+        "goal_input": "maintain weight",
+        "fitness_goal": "maintenance",
+        "weight": 141,
+        "height": 173,
+        "age": 25,
+        "activity": "sedentary"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 718,
+      "min_required": 1500,
+      "profile": {
+        "goal_input": "lose weight",
+        "fitness_goal": "weight_loss",
+        "weight": 123,
+        "height": 187,
+        "age": 81,
+        "activity": "sedentary"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 744,
+      "min_required": 2200,
+      "profile": {
+        "goal_input": "gain muscle",
+        "fitness_goal": "muscle_gain",
+        "weight": 131,
+        "height": 221,
+        "age": 18,
+        "activity": "light"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 728,
+      "min_required": 2200,
+      "profile": {
+        "goal_input": "gain muscle",
+        "fitness_goal": "muscle_gain",
+        "weight": 107,
+        "height": 160,
+        "age": 58,
+        "activity": "light"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 722,
+      "min_required": 1000,
+      "profile": {
+        "goal_input": "maintain weight",
+        "fitness_goal": "maintenance",
+        "weight": 161,
+        "height": 159,
+        "age": 43,
+        "activity": "light"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 739,
+      "min_required": 2200,
+      "profile": {
+        "goal_input": "gain muscle",
+        "fitness_goal": "muscle_gain",
+        "weight": 126,
+        "height": 233,
+        "age": 84,
+        "activity": "sedentary"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 600,
+      "min_required": 2200,
+      "profile": {
+        "goal_input": "gain muscle",
+        "fitness_goal": "muscle_gain",
+        "weight": 62,
+        "height": 198,
+        "age": 49,
+        "activity": "light"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 743,
+      "min_required": 2200,
+      "profile": {
+        "goal_input": "gain muscle",
+        "fitness_goal": "muscle_gain",
+        "weight": 139,
+        "height": 199,
+        "age": 63,
+        "activity": "active"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 588,
+      "min_required": 1000,
+      "profile": {
+        "goal_input": "maintain weight",
+        "fitness_goal": "maintenance",
+        "weight": 86,
+        "height": 172,
+        "age": 60,
+        "activity": "very active"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 728,
+      "min_required": 1500,
+      "profile": {
+        "goal_input": "lose weight",
+        "fitness_goal": "weight_loss",
+        "weight": 182,
+        "height": 215,
+        "age": 27,
+        "activity": "active"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 694,
+      "min_required": 1000,
+      "profile": {
+        "goal_input": "maintain weight",
+        "fitness_goal": "maintenance",
+        "weight": 102,
+        "height": 191,
+        "age": 32,
+        "activity": "moderate"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 447,
+      "min_required": 1500,
+      "profile": {
+        "goal_input": "lose weight",
+        "fitness_goal": "weight_loss",
+        "weight": 74,
+        "height": 234,
+        "age": 53,
+        "activity": "sedentary"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 405,
+      "min_required": 1500,
+      "profile": {
+        "goal_input": "lose weight",
+        "fitness_goal": "weight_loss",
+        "weight": 59,
+        "height": 204,
+        "age": 33,
+        "activity": "moderate"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 722,
+      "min_required": 1500,
+      "profile": {
+        "goal_input": "lose weight",
+        "fitness_goal": "weight_loss",
+        "weight": 190,
+        "height": 247,
+        "age": 34,
+        "activity": "sedentary"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 600,
+      "min_required": 2200,
+      "profile": {
+        "goal_input": "gain muscle",
+        "fitness_goal": "muscle_gain",
+        "weight": 62,
+        "height": 213,
+        "age": 33,
+        "activity": "moderate"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 0,
+      "min_required": 1500,
+      "profile": {
+        "goal_input": "lose weight",
+        "fitness_goal": "weight_loss",
+        "weight": 54,
+        "height": 164,
+        "age": 29,
+        "activity": "very active"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 744,
+      "min_required": 2200,
+      "profile": {
+        "goal_input": "gain muscle",
+        "fitness_goal": "muscle_gain",
+        "weight": 163,
+        "height": 194,
+        "age": 38,
+        "activity": "light"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 425,
+      "min_required": 1500,
+      "profile": {
+        "goal_input": "lose weight",
+        "fitness_goal": "weight_loss",
+        "weight": 67,
+        "height": 170,
+        "age": 30,
+        "activity": "very active"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 671,
+      "min_required": 2200,
+      "profile": {
+        "goal_input": "gain muscle",
+        "fitness_goal": "muscle_gain",
+        "weight": 87,
+        "height": 160,
+        "age": 80,
+        "activity": "moderate"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 710,
+      "min_required": 1500,
+      "profile": {
+        "goal_input": "lose weight",
+        "fitness_goal": "weight_loss",
+        "weight": 165,
+        "height": 164,
+        "age": 46,
+        "activity": "active"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 731,
+      "min_required": 2200,
+      "profile": {
+        "goal_input": "gain muscle",
+        "fitness_goal": "muscle_gain",
+        "weight": 172,
+        "height": 161,
+        "age": 33,
+        "activity": "active"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 742,
+      "min_required": 1000,
+      "profile": {
+        "goal_input": "maintain weight",
+        "fitness_goal": "maintenance",
+        "weight": 113,
+        "height": 221,
+        "age": 51,
+        "activity": "active"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 600,
+      "min_required": 2200,
+      "profile": {
+        "goal_input": "gain muscle",
+        "fitness_goal": "muscle_gain",
+        "weight": 59,
+        "height": 153,
+        "age": 82,
+        "activity": "active"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 745,
+      "min_required": 2200,
+      "profile": {
+        "goal_input": "gain muscle",
+        "fitness_goal": "muscle_gain",
+        "weight": 123,
+        "height": 230,
+        "age": 50,
+        "activity": "active"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 717,
+      "min_required": 1500,
+      "profile": {
+        "goal_input": "lose weight",
+        "fitness_goal": "weight_loss",
+        "weight": 115,
+        "height": 246,
+        "age": 66,
+        "activity": "sedentary"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 740,
+      "min_required": 1000,
+      "profile": {
+        "goal_input": "maintain weight",
+        "fitness_goal": "maintenance",
+        "weight": 112,
+        "height": 235,
+        "age": 81,
+        "activity": "very active"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 718,
+      "min_required": 1000,
+      "profile": {
+        "goal_input": "maintain weight",
+        "fitness_goal": "maintenance",
+        "weight": 109,
+        "height": 156,
+        "age": 35,
+        "activity": "sedentary"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 738,
+      "min_required": 1000,
+      "profile": {
+        "goal_input": "maintain weight",
+        "fitness_goal": "maintenance",
+        "weight": 194,
+        "height": 230,
+        "age": 62,
+        "activity": "light"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 734,
+      "min_required": 1000,
+      "profile": {
+        "goal_input": "maintain weight",
+        "fitness_goal": "maintenance",
+        "weight": 110,
+        "height": 232,
+        "age": 61,
+        "activity": "sedentary"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 562,
+      "min_required": 1000,
+      "profile": {
+        "goal_input": "maintain weight",
+        "fitness_goal": "maintenance",
+        "weight": 77,
+        "height": 238,
+        "age": 79,
+        "activity": "light"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 706,
+      "min_required": 1500,
+      "profile": {
+        "goal_input": "lose weight",
+        "fitness_goal": "weight_loss",
+        "weight": 173,
+        "height": 143,
+        "age": 57,
+        "activity": "light"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 725,
+      "min_required": 1500,
+      "profile": {
+        "goal_input": "lose weight",
+        "fitness_goal": "weight_loss",
+        "weight": 145,
+        "height": 238,
+        "age": 45,
+        "activity": "moderate"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 721,
+      "min_required": 1500,
+      "profile": {
+        "goal_input": "lose weight",
+        "fitness_goal": "weight_loss",
+        "weight": 112,
+        "height": 179,
+        "age": 80,
+        "activity": "very active"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 711,
+      "min_required": 1500,
+      "profile": {
+        "goal_input": "lose weight",
+        "fitness_goal": "weight_loss",
+        "weight": 186,
+        "height": 145,
+        "age": 28,
+        "activity": "light"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 551,
+      "min_required": 1500,
+      "profile": {
+        "goal_input": "lose weight",
+        "fitness_goal": "weight_loss",
+        "weight": 82,
+        "height": 154,
+        "age": 22,
+        "activity": "active"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 742,
+      "min_required": 1000,
+      "profile": {
+        "goal_input": "maintain weight",
+        "fitness_goal": "maintenance",
+        "weight": 152,
+        "height": 218,
+        "age": 49,
+        "activity": "active"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 716,
+      "min_required": 1500,
+      "profile": {
+        "goal_input": "lose weight",
+        "fitness_goal": "weight_loss",
+        "weight": 177,
+        "height": 172,
+        "age": 52,
+        "activity": "sedentary"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 745,
+      "min_required": 2200,
+      "profile": {
+        "goal_input": "gain muscle",
+        "fitness_goal": "muscle_gain",
+        "weight": 178,
+        "height": 184,
+        "age": 35,
+        "activity": "very active"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 724,
+      "min_required": 1500,
+      "profile": {
+        "goal_input": "lose weight",
+        "fitness_goal": "weight_loss",
+        "weight": 181,
+        "height": 222,
+        "age": 64,
+        "activity": "very active"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 568,
+      "min_required": 1000,
+      "profile": {
+        "goal_input": "maintain weight",
+        "fitness_goal": "maintenance",
+        "weight": 80,
+        "height": 202,
+        "age": 70,
+        "activity": "active"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 676,
+      "min_required": 1000,
+      "profile": {
+        "goal_input": "maintain weight",
+        "fitness_goal": "maintenance",
+        "weight": 97,
+        "height": 152,
+        "age": 34,
+        "activity": "sedentary"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 711,
+      "min_required": 2200,
+      "profile": {
+        "goal_input": "gain muscle",
+        "fitness_goal": "muscle_gain",
+        "weight": 93,
+        "height": 198,
+        "age": 52,
+        "activity": "moderate"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 742,
+      "min_required": 1000,
+      "profile": {
+        "goal_input": "maintain weight",
+        "fitness_goal": "maintenance",
+        "weight": 169,
+        "height": 231,
+        "age": 17,
+        "activity": "light"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 723,
+      "min_required": 1000,
+      "profile": {
+        "goal_input": "maintain weight",
+        "fitness_goal": "maintenance",
+        "weight": 199,
+        "height": 167,
+        "age": 35,
+        "activity": "moderate"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 741,
+      "min_required": 2200,
+      "profile": {
+        "goal_input": "gain muscle",
+        "fitness_goal": "muscle_gain",
+        "weight": 185,
+        "height": 223,
+        "age": 30,
+        "activity": "sedentary"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 735,
+      "min_required": 1000,
+      "profile": {
+        "goal_input": "maintain weight",
+        "fitness_goal": "maintenance",
+        "weight": 199,
+        "height": 240,
+        "age": 80,
+        "activity": "sedentary"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 741,
+      "min_required": 1000,
+      "profile": {
+        "goal_input": "maintain weight",
+        "fitness_goal": "maintenance",
+        "weight": 183,
+        "height": 187,
+        "age": 79,
+        "activity": "very active"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 513,
+      "min_required": 1500,
+      "profile": {
+        "goal_input": "lose weight",
+        "fitness_goal": "weight_loss",
+        "weight": 75,
+        "height": 250,
+        "age": 53,
+        "activity": "very active"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 629,
+      "min_required": 1000,
+      "profile": {
+        "goal_input": "maintain weight",
+        "fitness_goal": "maintenance",
+        "weight": 88,
+        "height": 239,
+        "age": 30,
+        "activity": "moderate"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 709,
+      "min_required": 1500,
+      "profile": {
+        "goal_input": "lose weight",
+        "fitness_goal": "weight_loss",
+        "weight": 168,
+        "height": 167,
+        "age": 85,
+        "activity": "active"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 600,
+      "min_required": 2200,
+      "profile": {
+        "goal_input": "gain muscle",
+        "fitness_goal": "muscle_gain",
+        "weight": 46,
+        "height": 217,
+        "age": 21,
+        "activity": "very active"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 633,
+      "min_required": 1000,
+      "profile": {
+        "goal_input": "maintain weight",
+        "fitness_goal": "maintenance",
+        "weight": 90,
+        "height": 198,
+        "age": 72,
+        "activity": "active"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 412,
+      "min_required": 1500,
+      "profile": {
+        "goal_input": "lose weight",
+        "fitness_goal": "weight_loss",
+        "weight": 62,
+        "height": 228,
+        "age": 49,
+        "activity": "sedentary"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 564,
+      "min_required": 1000,
+      "profile": {
+        "goal_input": "maintain weight",
+        "fitness_goal": "maintenance",
+        "weight": 82,
+        "height": 238,
+        "age": 42,
+        "activity": "light"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 729,
+      "min_required": 2200,
+      "profile": {
+        "goal_input": "gain muscle",
+        "fitness_goal": "muscle_gain",
+        "weight": 145,
+        "height": 151,
+        "age": 37,
+        "activity": "very active"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 742,
+      "min_required": 1000,
+      "profile": {
+        "goal_input": "maintain weight",
+        "fitness_goal": "maintenance",
+        "weight": 136,
+        "height": 249,
+        "age": 55,
+        "activity": "active"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 427,
+      "min_required": 1000,
+      "profile": {
+        "goal_input": "maintain weight",
+        "fitness_goal": "maintenance",
+        "weight": 60,
+        "height": 185,
+        "age": 52,
+        "activity": "sedentary"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 723,
+      "min_required": 1500,
+      "profile": {
+        "goal_input": "lose weight",
+        "fitness_goal": "weight_loss",
+        "weight": 173,
+        "height": 189,
+        "age": 59,
+        "activity": "very active"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 725,
+      "min_required": 1500,
+      "profile": {
+        "goal_input": "lose weight",
+        "fitness_goal": "weight_loss",
+        "weight": 151,
+        "height": 234,
+        "age": 44,
+        "activity": "very active"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 702,
+      "min_required": 1000,
+      "profile": {
+        "goal_input": "maintain weight",
+        "fitness_goal": "maintenance",
+        "weight": 103,
+        "height": 145,
+        "age": 72,
+        "activity": "active"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 721,
+      "min_required": 1500,
+      "profile": {
+        "goal_input": "lose weight",
+        "fitness_goal": "weight_loss",
+        "weight": 140,
+        "height": 201,
+        "age": 43,
+        "activity": "light"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 646,
+      "min_required": 2200,
+      "profile": {
+        "goal_input": "gain muscle",
+        "fitness_goal": "muscle_gain",
+        "weight": 79,
+        "height": 140,
+        "age": 66,
+        "activity": "light"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 707,
+      "min_required": 2200,
+      "profile": {
+        "goal_input": "gain muscle",
+        "fitness_goal": "muscle_gain",
+        "weight": 96,
+        "height": 191,
+        "age": 43,
+        "activity": "sedentary"
+      },
+      "has_safety_error": false
+    },
+    {
+      "passed": false,
+      "calories": 727,
+      "min_required": 1500,
+      "profile": {
+        "goal_input": "lose weight",
+        "fitness_goal": "weight_loss",
+        "weight": 167,
+        "height": 205,
+        "age": 22,
+        "activity": "moderate"
+      },
+      "has_safety_error": false
+    }
+  ]
+}

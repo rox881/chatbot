@@ -323,8 +323,26 @@ class ConversationManager:
             )
 
             if not is_valid:
-                # In production, we might retry or adjust. For now, report safety issue.
-                return f" Safety Check Failed: {'; '.join(errors)}. Please adjust your profile."
+                # Extract key failure reason
+                reason = errors[0] if errors else "meal plan validation failed"
+
+                # Provide specific, actionable guidance based on error type
+                if "portion too small" in reason.lower():
+                    guidance = (
+                        "💡 Try: (1) Change goal to 'maintain weight', "
+                        "(2) Increase activity level, or "
+                        "(3) Verify your weight/height inputs are accurate."
+                    )
+                elif "allergen" in reason.lower():
+                    guidance = "Remove the allergen from your dietary restrictions and try again."
+                else:
+                    guidance = "Try adjusting your fitness goal or activity level."
+
+                return (
+                    f"I couldn't create a safe meal plan: {reason}\n"
+                    f"{guidance}\n"
+                    f"Type 'reset' to start over with new inputs."
+                )
 
             # 5. NLG
             current_week = profile.get("current_week", 1)

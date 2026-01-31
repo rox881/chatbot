@@ -1,5 +1,3 @@
-Here's a **professional, production-ready README.md** that accurately reflects your architecture (including the unused intent classifier) with emphasis on safety-first design:
-
 ```markdown
 # 💪 Conversational Fitness Agent — Safe & Personalized Nutrition Coaching
 
