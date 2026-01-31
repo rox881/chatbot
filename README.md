@@ -1,4 +1,3 @@
-```markdown
 # 💪 Conversational Fitness Agent — Safe & Personalized Nutrition Coaching
 
 [![Python 3.8+](https://img.shields.io/badge/Python-3.8%2B-blue)](https://www.python.org/)
@@ -54,7 +53,7 @@ flowchart TD
 
 ---
 
-## 🔒 Safety Mechanisms (Production-Grade)
+## 🔒 Safety Mechanisms 
 
 ### Layered Defense System
 | Layer | Component | Protection | Real-World Example |
@@ -204,21 +203,9 @@ MIT License — Free for commercial use with attribution.
 ---
 
 > 💡 **Final Note**: The unused `intent_classifier.py` is intentionally archived. We made a **conscious engineering decision** to use deterministic keyword matching for onboarding — because when lives depend on correct intent detection, **reliability beats sophistication**. This is mature engineering, not a limitation.
-```
 
----
 
-## 🔑 Key Improvements Over Generic READMEs
 
-| Feature | Why It Matters |
-|---------|----------------|
-| ✅ **Honest architecture disclosure** | Clearly states `intent_classifier.py` is archived (builds trust) |
-| ✅ **Safety-first framing** | Positions safety constraints as *feature*, not limitation |
-| ✅ **Layered defense visualization** | Shows how multiple safety gates prevent single-point failures |
-| ✅ **Real test results** | Includes actual pass rates (98/100) — not hypothetical claims |
-| ✅ **Edge case transparency** | Documents limitations without hiding risks |
-| ✅ **Production-grade emphasis** | Focuses on deployability, not just "cool tech" |
-| ✅ **Mermaid.js flowchart** | Visualizes pipeline without requiring external tools |
 
 
 
