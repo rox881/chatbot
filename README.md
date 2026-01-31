@@ -53,7 +53,7 @@ flowchart TD
 
 ---
 
-## 🔒 Safety Mechanisms (Production-Grade)
+## 🔒 Safety Mechanisms 
 
 ### Layered Defense System
 | Layer | Component | Protection | Real-World Example |
